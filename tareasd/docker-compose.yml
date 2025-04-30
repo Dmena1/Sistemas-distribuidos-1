@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  scraper:
+    build: .
+    depends_on:
+      - cache
+    environment:
+      - URL_MONGODB=http://cache:8001/eventos
+    volumes:
+      - .:/app
+    tty: true
+
+  cache:
+    build:
+      context: ./cache
+    container_name: cache
+    ports:
+      - "8001:8001"
+
+  generador:
+    build:
+      context: ./generador
+    depends_on:
+      - cacheador
+    environment:
+      - URL_CONSULTA=http://cacheador:8002/eventos
+      - DISTRIBUCION=poisson
+      - TASA_POISSON=1.0
+
+  cacheador:
+    build:
+      context: ./cacheador
+    container_name: cacheador
+    ports:
+      - "8002:8002"
+    environment:
+      - CACHE_SIZE=100
+      - CACHE_POLICY=LFU      # LRU o LFU
+      - BACKEND_URL=http://cache:8001/eventos
+
