@@ -27,6 +27,9 @@ services:
       - URL_CONSULTA=http://cacheador:8002/eventos
       - DISTRIBUCION=poisson
       - TASA_POISSON=1.0
+      # - DISTRIBUCION=uniforme
+      # - INTERVALO_MIN=1.0
+      # - INTERVALO_MAX=3.0
 
   cacheador:
     build:
