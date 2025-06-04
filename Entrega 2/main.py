@@ -3,14 +3,14 @@ import json
 import time
 import requests
 
-# 🔧 CONFIGURACIÓN GENERAL
+# CONFIGURACIÓN GENERAL
 MAX_EVENTOS = 10000
 ZOOM_SCROLL = 300
 ZOOM_OUT_INICIAL = 1
 INTERVALO = 4
 PIXEL_POR_KM = 11
 
-# 🧭 GRILLA DE LA REGIÓN METROPOLITANA
+# GRILLA DE LA REGIÓN METROPOLITANA
 ANCHO_GRILLA = 6
 ALTO_GRILLA = 8
 ESPACIADO_KM_X = 10
@@ -55,7 +55,7 @@ def procesar_eventos(data):
 
 def mover_mapa(page, dx, dy):
     center_x, center_y = 600, 300
-    print(f"🧭 Moviendo mapa dx={dx}, dy={dy}")
+    print(f"Moviendo mapa dx={dx}, dy={dy}")
     page.mouse.move(center_x, center_y)
     page.mouse.down()
     page.mouse.move(center_x + dx, center_y + dy, steps=20)
@@ -72,7 +72,7 @@ def zoom(page, sentido="out", veces=1):
         time.sleep(0.6)
 
 def capturar(page):
-    print("⏳ Esperando para capturar eventos...")
+    print("Esperando para capturar eventos...")
     time.sleep(INTERVALO)
 
 def generar_grilla():
@@ -94,21 +94,21 @@ def main():
                 try:
                     data = response.json()
                     nuevos = procesar_eventos(data)
-                    print(f"✅ Nuevos: {nuevos} | Total: {len(eventos_acumulados)}")
+                    print(f"Nuevos: {nuevos} | Total: {len(eventos_acumulados)}")
                 except Exception as e:
-                    print(f"❌ Error al procesar respuesta: {e}")
+                    print(f"Error al procesar respuesta: {e}")
 
         page.on("response", handle_response)
 
-        print("🌐 Abriendo Waze centrado en Santiago...")
+        print("Abriendo Waze centrado en Santiago...")
         page.goto("https://www.waze.com/es-419/live-map?ll=-33.075484,-70.932070&zoom=9")
 
         try:
             page.wait_for_selector("//button[contains(text(), 'Entendido')]", timeout=15000)
             page.locator("//button[contains(text(), 'Entendido')]").click()
-            print("✅ Popup cerrado")
+            print("Popup cerrado")
         except:
-            print("⚠️ No apareció popup")
+            print("No apareció popup")
 
         time.sleep(10)
 
@@ -120,7 +120,7 @@ def main():
 
         while len(eventos_acumulados) < MAX_EVENTOS:
             ciclo += 1
-            print(f"\n🔁 Ciclo #{ciclo} recorriendo grilla RM")
+            print(f"\nCiclo #{ciclo} recorriendo grilla RM")
 
             for dx, dy in zonas:
                 if len(eventos_acumulados) >= MAX_EVENTOS:
@@ -132,10 +132,10 @@ def main():
         with open("eventos_region_metropolitana.json", "w", encoding="utf-8") as f:
             json.dump({"alerts": eventos_acumulados}, f, indent=2, ensure_ascii=False)
 
-        print(f"\n✅ Terminado. Total de eventos recolectados: {len(eventos_acumulados)}")
+        print(f"\nTerminado. Total de eventos recolectados: {len(eventos_acumulados)}")
 
         # Enviar al backend
-        print("📤 Enviando eventos al backend...")
+        print("Enviando eventos al backend...")
         enviados = 0
         for evento in eventos_acumulados:
             try:
@@ -143,8 +143,8 @@ def main():
                 response.raise_for_status()
                 enviados += 1
             except Exception as e:
-                print(f"❌ Error al enviar evento: {e}")
-        print(f"🎉 Se enviaron {enviados} eventos a http://cache:8001/eventos")
+                print(f"Error al enviar evento: {e}")
+        print(f"Se enviaron {enviados} eventos a http://cache:8001/eventos")
 
         browser.close()
 

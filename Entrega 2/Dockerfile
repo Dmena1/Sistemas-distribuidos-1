@@ -19,5 +19,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Instalar navegadores necesarios para Playwright
 RUN python -m playwright install --with-deps
 
-# 🚀 Comando por defecto: ejecutar tu script
+# Comando por defecto: ejecutar tu script
 CMD ["python", "main.py"]

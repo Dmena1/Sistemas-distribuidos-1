@@ -20,7 +20,7 @@ app.add_middleware(
 async def recibir_evento(request: Request):
     data = await request.json()
     eventos.append(data)
-    print(f"🟢 Evento recibido. Total: {len(eventos)}")
+    print(f"Evento recibido. Total: {len(eventos)}")
 
     # Guardar en disco cada vez que se agrega (opcional)
     with open("eventos_guardados.json", "w", encoding="utf-8") as f:
@@ -28,7 +28,7 @@ async def recibir_evento(request: Request):
 
     return {"mensaje": "Evento recibido", "total": len(eventos)}
 
-# 🆕 NUEVA RUTA PARA CONSULTAS
+# NUEVA RUTA PARA CONSULTAS
 @app.get("/eventos")
 def obtener_eventos(
     tipo: Optional[str] = Query(None),

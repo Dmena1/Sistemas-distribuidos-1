@@ -6,10 +6,10 @@ cache = {}  # caché en memoria
 
 def contar_por_tipo(tipo):
     if tipo in cache:
-        print("🧠 Respuesta desde CACHÉ")
+        print("Respuesta desde CACHÉ")
         return cache[tipo]
 
-    print("🐢 Consultando SIN caché...")
+    print("Consultando SIN caché...")
     inicio = time.time()
     conteo = 0
 
@@ -27,10 +27,10 @@ def contar_por_tipo(tipo):
 def contar_por_comuna(comuna):
     key = f"comuna:{comuna}"
     if key in cache:
-        print("🧠 Respuesta desde CACHÉ")
+        print("Respuesta desde CACHÉ")
         return cache[key]
 
-    print("🐢 Consultando SIN caché...")
+    print("Consultando SIN caché...")
     inicio = time.time()
     conteo = 0
 
@@ -47,20 +47,19 @@ def contar_por_comuna(comuna):
 
 # Ejemplo de uso
 if __name__ == "__main__":
-    while True:
-        print("\n📊 Consulta de eventos")
-        print("1. Consultar por tipo")
-        print("2. Consultar por comuna")
-        print("0. Salir")
-        opcion = input("Selecciona opción: ")
+    import time as t
 
-        if opcion == "0":
-            break
-        elif opcion == "1":
-            tipo = input("Tipo de evento (ej: JAM): ").strip().upper()
-            contar_por_tipo(tipo)
-        elif opcion == "2":
-            comuna = input("Nombre exacto de la comuna (ej: Ñuñoa): ").strip()
-            contar_por_comuna(comuna)
-        else:
-            print("Opción inválida.")
+    print("\nConsulta SIN caché:")
+    start1 = t.time()
+    contar_por_tipo("JAM")
+    contar_por_comuna("Ñuñoa")
+    end1 = t.time()
+    print(f"Total sin caché: {end1 - start1:.6f} s")
+
+    print("\nConsulta CON caché:")
+    start2 = t.time()
+    contar_por_tipo("JAM")
+    contar_por_comuna("Ñuñoa")
+    end2 = t.time()
+    print(f"Total con caché: {end2 - start2:.6f} s")
+

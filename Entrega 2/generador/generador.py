@@ -3,7 +3,7 @@ import random
 import requests
 import os
 
-# 📦 Configuraciones desde variables de entorno
+# Configuraciones desde variables de entorno
 URL_CONSULTA = os.getenv("URL_CONSULTA", "http://cache:8001/eventos")
 DISTRIBUCION = os.getenv("DISTRIBUCION", "uniforme")
 TASA_POISSON = float(os.getenv("TASA_POISSON", 1.0))
@@ -35,13 +35,13 @@ def simular_usuario():
         url = construir_url()
         try:
             response = requests.get(url)
-            print(f"✅ Consulta a {url} → {response.status_code}")
+            print(f"Consulta a {url} → {response.status_code}")
         except Exception as e:
-            print(f"❌ Error al consultar {url}: {e}")
+            print(f"Error al consultar {url}: {e}")
         intervalo = obtener_intervalo()
-        print(f"🕒 Esperando {intervalo:.2f} segundos...\n")
+        print(f"Esperando {intervalo:.2f} segundos...\n")
         time.sleep(intervalo)
 
 if __name__ == "__main__":
-    print(f"🔁 Generador iniciado con distribución: {DISTRIBUCION}")
+    print(f"Generador iniciado con distribución: {DISTRIBUCION}")
     simular_usuario()
