@@ -36,9 +36,11 @@ cambio de sistema de distribución: Para realizar el cambio entre la distibució
 
 Cambio de política de caché: Para cambiar entre las políticas LRU y LFU, se debe modificar la línea 42 del código, seleccionando la que se desea utilizar.
 Análisis con Apache Pig (Entrega 2)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 Descripción de scripts:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 analisis_incidentes.pig: Realiza análisis de eventos sin filtrar.
 
 analisis_limpios.pig: Análisis enfocado en eventos filtrados y limpios.
