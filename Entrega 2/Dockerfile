@@ -1,23 +1,15 @@
-# Imagen base oficial de Python
 FROM python:3.12-slim
 
-# Instalar librerías del sistema que necesita Playwright para funcionar
-RUN apt-get update && apt-get install -y \
-    wget gnupg libglib2.0-0 libnss3 libgdk-pixbuf2.0-0 libgtk-3-0 libxss1 \
-    libasound2 libatk-bridge2.0-0 libx11-xcb1 libdrm2 libgbm1 libu2f-udev \
-    && apt-get clean
-
-# Carpeta de trabajo dentro del contenedor
+# Crear directorio de trabajo
 WORKDIR /app
 
-# Copiamos los archivos del proyecto al contenedor
-COPY . .
+# Copiar solo los archivos necesarios
+COPY simulador_cache.py .
+COPY eventos_limpios.csv .
+COPY requirements.txt .
 
-# Instalar dependencias de Python
+# Instalar dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Instalar navegadores necesarios para Playwright
-RUN python -m playwright install --with-deps
-
-# Comando por defecto: ejecutar tu script
-CMD ["python", "main.py"]
+# Ejecutar el simulador de caché
+CMD ["python", "simulador_cache.py"]
