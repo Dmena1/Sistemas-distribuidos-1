@@ -57,7 +57,7 @@ tareasd/
 
 ### Instrucciones de ejecución:
 ```bash
-git clone https://github.com/tuusuario/tareasd.git
+git clone https://github.com/Dmena1/Sistemas-distribuidos-1/
 cd tareasd/Entrega1
 docker-compose up --build
 ```
