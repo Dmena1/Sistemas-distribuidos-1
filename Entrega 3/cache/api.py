@@ -8,7 +8,6 @@ app = FastAPI()
 
 eventos = []  # Guardamos en memoria
 
-# Permitir CORS para pruebas locales (opcional)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -28,7 +27,6 @@ async def recibir_evento(request: Request):
 
     return {"mensaje": "Evento recibido", "total": len(eventos)}
 
-# NUEVA RUTA PARA CONSULTAS
 @app.get("/eventos")
 def obtener_eventos(
     tipo: Optional[str] = Query(None),

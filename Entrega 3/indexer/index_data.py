@@ -1,7 +1,7 @@
 import requests
 import time
 
-ELASTIC_URL = "http://elasticsearch:9200"  # Nombre del contenedor, no localhost
+ELASTIC_URL = "http://elasticsearch:9200"  # Dirección de Elasticsearch
 
 def wait_for_elasticsearch():
     """Espera a que Elasticsearch esté listo"""

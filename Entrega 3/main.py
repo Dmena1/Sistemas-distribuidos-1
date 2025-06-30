@@ -112,7 +112,7 @@ def main():
 
         time.sleep(10)
 
-        print("🔭 Haciendo zoom out inicial para mayor cobertura...")
+        print("Haciendo zoom out inicial")
         zoom(page, "out", ZOOM_OUT_INICIAL)
 
         zonas = generar_grilla()

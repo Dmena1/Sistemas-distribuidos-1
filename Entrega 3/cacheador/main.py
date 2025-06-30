@@ -9,12 +9,12 @@ CACHE_SIZE = int(os.getenv("CACHE_SIZE", 100))
 CACHE_POLICY = os.getenv("CACHE_POLICY", "LRU").upper()
 BACKEND_URL = os.getenv("BACKEND_URL", "http://cache:8001/eventos")
 
-# Selección de política
+# Selección de distribución
 if CACHE_POLICY == "LFU":
-    print("🧠 Usando política de caché: LFU")
+    print("Usando política de caché: LFU")
     cache = LFUCache(capacity=CACHE_SIZE)
 else:
-    print("🧠 Usando política de caché: LRU")
+    print("Usando política de caché: LRU")
     cache = LRUCache(capacity=CACHE_SIZE)
 
 app = FastAPI()
