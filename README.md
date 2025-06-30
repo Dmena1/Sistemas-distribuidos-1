@@ -23,7 +23,7 @@ Este proyecto aborda el análisis y procesamiento de eventos de tráfico en tiem
 ---
 
 ## Estructura General del Proyecto
-
+```
 Entrega 3
 │   analisis_incidentes.pig
 │   analisis_limpios.pig
@@ -92,7 +92,7 @@ Entrega 3
             ._SUCCESS.crc
             part-r-00000
             _SUCCESS
-
+```
 
 ---
 
