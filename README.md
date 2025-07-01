@@ -142,8 +142,8 @@ docker-compose up --build
 ### Instrucciones:
 
 ```bash
-cd Sistemas-distribuidos-1/Entrega3
-docker-compose up -d
+cd Sistemas-distribuidos-1/'Entrega 3'
+docker-compose up --build
 ```
 
 #### Verificar servicios:
